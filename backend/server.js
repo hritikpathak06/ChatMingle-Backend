@@ -8,6 +8,7 @@ const userRoutes = require("./routes/userRoutes.js");
 const chatRoutes = require("./routes/chatRoutes.js");
 const messageRoutes = require("./routes/messageRoutes.js");
 const path = require("path");
+const cors = require("cors");
 
 // Config
 dotenv.config();
@@ -17,6 +18,9 @@ connectToDB();
 app.use(express.json({ limit: "100mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "100mb" }));
 app.use(morgan("common"));
+app.use(cors({
+  origin:process.env.APP_URL
+}))
 
 // Routes
 app.use("/api/v1/user", userRoutes);
